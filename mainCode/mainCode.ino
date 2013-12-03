@@ -59,7 +59,7 @@ void loop()
   
   for (currentStep = 0; currentStep < 8; currentStep ++)
   {
-    int note = map(analogRead(currentStep), 0, 1023, 0, 12);
+    int note = map(analogRead(POT_STEP[currentStep]), 0, 1023, 0, 12);
     digitalWrite(LED_STEP[currentStep], HIGH);
     switch(selectedWave)
     {

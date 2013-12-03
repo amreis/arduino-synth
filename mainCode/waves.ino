@@ -93,7 +93,7 @@ void triangularWave(int freq, int durationInMillis)
       digitalWrite(DAC_BIT3, (i & 8) >> 3);
       delayMicroseconds(freq);
     }
-  } while (startPoint - millis() <= durationInMillis);
+  } while (millis() - startPoint <= durationInMillis);
 }
 
 
