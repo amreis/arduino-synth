@@ -9,7 +9,7 @@ int crazyValues [33] = { 0,6,12,17,22,25,28,30,31,30,28,25,22,17,12,6,0,-6,-11,-
 
 void crazyWave(int freq, int durationInMillis)
 {
-  int startPoint = millis();
+  long startPoint = millis();
   do {
     for (int i = 0; i < 32; i++)
     {
@@ -24,7 +24,7 @@ void crazyWave(int freq, int durationInMillis)
 
 void sawtoothWave(int freq, int durationInMillis)
 {
-  int startPoint = millis();
+  long startPoint = millis();
   do {
     for (int i = 0; i < 31; i++)
     {
@@ -39,7 +39,7 @@ void sawtoothWave(int freq, int durationInMillis)
 
 void sineWave(int freq, int durationInMillis)
 {
-  int startPoint = millis();
+  long startPoint = millis();
   do {
     for (int i = 0; i < 32; i++)
     {
@@ -54,7 +54,7 @@ void sineWave(int freq, int durationInMillis)
 
 void squareWave (int freq, int durationInMillis)
 {
-    int startPoint = millis();
+    long startPoint = millis();
     do {
     digitalWrite(DAC_BIT0,LOW);
     digitalWrite(DAC_BIT1,LOW);
@@ -75,7 +75,7 @@ void squareWave (int freq, int durationInMillis)
 
 void triangularWave(int freq, int durationInMillis)
 {
-  int startPoint = millis();
+  long startPoint = millis();
   do {
     for (int i = 0; i < 32; i++)
     {

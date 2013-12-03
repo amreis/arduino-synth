@@ -4,6 +4,7 @@
 const short POT_STEP[8] = {A0, A1, A2, A3, A4, A5, A6, A7 };
 const short LED_STEP[8] = {36, 34, 32, 30, 28, 26, 24, 22 };
 
+const short NO_NOTE = 0;
 const short DO = 1;
 const short DO_SHARP = 2;
 const short RE = 3;
@@ -53,37 +54,42 @@ void loop()
   //   Turn s's led on.
   //   Next step.
   //   Cycle!
-  selectedWave = map(analogRead(POT_WAVE_SELECTOR), 0, 1023, 1, NUMBER_OF_WAVES);
   
-  duration     = map(analogRead(POT_DURATION), 0, 1023, 0, 500);   
   
   for (currentStep = 0; currentStep < 8; currentStep ++)
   {
+    selectedWave = map(analogRead(POT_WAVE_SELECTOR), 0, 1023, 1, NUMBER_OF_WAVES);
+  
+    duration     = map(analogRead(POT_DURATION), 0, 1023, 500, 0);   
     int note = map(analogRead(POT_STEP[currentStep]), 0, 1023, 0, 12);
     digitalWrite(LED_STEP[currentStep], HIGH);
-    switch(selectedWave)
+    if (note != NO_NOTE)
     {
-    case CRAZY_WAVE:
-      WAVE_INDICATOR.setColor(0xFF, 0x00, 0x00);
-      crazyWave(note, duration);
-      break;
-    case SAWTOOTH_WAVE:
-      WAVE_INDICATOR.setColor(0xFF, 0x00, 0xff);
-      sawtoothWave(note, duration);
-      break;
-    case SINE_WAVE:
-      WAVE_INDICATOR.setColor(0xFF, 0xff, 0x00);
-      sineWave(note, duration);
-      break;
-    case SQUARE_WAVE:
-      WAVE_INDICATOR.setColor(0x00, 0x00, 0xFF);
-      squareWave(note, duration);
-      break;
-    case TRIANGULAR_WAVE:
-      WAVE_INDICATOR.setColor(0xCC, 0xCC, 0xCC);
-      triangularWave(note, duration);
-      break;
+      switch(selectedWave)
+      {
+      case CRAZY_WAVE:
+        WAVE_INDICATOR.setColor(0xFF, 0x00, 0x00);
+        crazyWave(note*50 + 100, duration);
+        break;
+      case SAWTOOTH_WAVE:
+        WAVE_INDICATOR.setColor(0xFF, 0x00, 0xff);
+        sawtoothWave(note*50 + 100, duration);
+        break;
+      case SINE_WAVE:
+        WAVE_INDICATOR.setColor(0xFF, 0xff, 0x00);
+        sineWave(note*50 + 100, duration);
+        break;
+      case SQUARE_WAVE:
+        WAVE_INDICATOR.setColor(0x00, 0x00, 0xFF);
+        squareWave(note*50 + 100, duration);
+        break;
+      case TRIANGULAR_WAVE:
+        WAVE_INDICATOR.setColor(0xCC, 0xCC, 0xCC);
+        triangularWave(note*50 + 100, duration);
+        break;
+      }
     }
+    else { delay(duration); }
     digitalWrite(LED_STEP[currentStep], LOW);
     
   }
