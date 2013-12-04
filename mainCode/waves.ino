@@ -1,5 +1,4 @@
 #include "waves.h"
-
 const short DAC_BIT0 = 13;
 const short DAC_BIT1 = 12;
 const short DAC_BIT2 = 11;
@@ -26,7 +25,7 @@ void sawtoothWave(int freq, int durationInMillis)
 {
   long startPoint = millis();
   do {
-    for (int i = 0; i < 31; i++)
+    for (int i = 0; i < 32  ; i++)
     {
       digitalWrite(DAC_BIT0, (i & 1));
       digitalWrite(DAC_BIT1, (i & 2) >> 1);
@@ -67,6 +66,8 @@ void squareWave (int freq, int durationInMillis)
     digitalWrite(DAC_BIT2,HIGH);
     digitalWrite(DAC_BIT3,HIGH);
     delayMicroseconds(16*freq+120);
+
+
     } while (millis() - startPoint <= durationInMillis);
 }
 

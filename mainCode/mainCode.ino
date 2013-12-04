@@ -3,7 +3,8 @@
 
 const short POT_STEP[8] = {A0, A1, A2, A3, A4, A5, A6, A7 };
 const short LED_STEP[8] = {36, 34, 32, 30, 28, 26, 24, 22 };
-
+const int SQUARE_FREQ [13] = {0, 228, 214, 202, 190, 179, 168, 158, 149, 140, 132, 124, 117};
+                          //  x   C    C#   D    D#   E    F    F#   G   G#   A    A#    B
 const short NO_NOTE = 0;
 const short DO = 1;
 const short DO_SHARP = 2;
@@ -60,7 +61,8 @@ void loop()
   {
     selectedWave = map(analogRead(POT_WAVE_SELECTOR), 0, 1023, 1, NUMBER_OF_WAVES);
   
-    duration     = map(analogRead(POT_DURATION), 0, 1023, 500, 0);   
+    duration     = map(analogRead(POT_DURATION), 0, 1023, 5000, 0);
+    if (duration == 500) duration = -1;   
     int note = map(analogRead(POT_STEP[currentStep]), 0, 1023, 0, 12);
     digitalWrite(LED_STEP[currentStep], HIGH);
     if (note != NO_NOTE)
@@ -69,23 +71,23 @@ void loop()
       {
       case CRAZY_WAVE:
         WAVE_INDICATOR.setColor(0xFF, 0x00, 0x00);
-        crazyWave(note*50 + 100, duration);
+        crazyWave(note*50, duration);
         break;
       case SAWTOOTH_WAVE:
         WAVE_INDICATOR.setColor(0xFF, 0x00, 0xff);
-        sawtoothWave(note*50 + 100, duration);
+        sawtoothWave(note*50, duration);
         break;
       case SINE_WAVE:
         WAVE_INDICATOR.setColor(0xFF, 0xff, 0x00);
-        sineWave(note*50 + 100, duration);
+        sineWave(note*50, duration);
         break;
       case SQUARE_WAVE:
         WAVE_INDICATOR.setColor(0x00, 0x00, 0xFF);
-        squareWave(note*50 + 100, duration);
+        squareWave(SQUARE_FREQ[note], duration);
         break;
       case TRIANGULAR_WAVE:
         WAVE_INDICATOR.setColor(0xCC, 0xCC, 0xCC);
-        triangularWave(note*50 + 100, duration);
+        triangularWave(note*50, duration);
         break;
       }
     }
