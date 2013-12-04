@@ -61,7 +61,7 @@ void loop()
   {
     selectedWave = map(analogRead(POT_WAVE_SELECTOR), 0, 1023, 1, NUMBER_OF_WAVES);
   
-    duration     = map(analogRead(POT_DURATION), 0, 1023, 5000, 0);
+    duration     = map(analogRead(POT_DURATION), 0, 1023, 450, 0);
     if (duration == 500) duration = -1;   
     int note = map(analogRead(POT_STEP[currentStep]), 0, 1023, 0, 12);
     digitalWrite(LED_STEP[currentStep], HIGH);
